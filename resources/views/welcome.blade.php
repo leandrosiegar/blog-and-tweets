@@ -5,10 +5,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             @foreach ($entries as $item)
-                <div class="card mt-4">
+                <div class="card mt-4 mb-4">
                     <div class="card-header">{{ $item->id }}. {{ $item->title }}</div>
                         <div class="card-body">
                                 <p>{{ $item->content }}</p>
+                        </div>
+
+                        <div class="card-footer">
+                            Autor:
+                        <a href="{{ url('users/'.$item->user_id)}}">
+                                {{ $item->user->name }}
+                            </a>
                         </div>
                 </div>
             @endforeach
