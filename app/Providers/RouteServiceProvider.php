@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
+use App\Entry;
+
 class RouteServiceProvider extends ServiceProvider
 {
     /**
@@ -30,9 +32,15 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+         parent::boot();
 
-        parent::boot();
+        // para hacer que coga el id del slug por si se cambie el slug tire siempre del id
+        Route::bind('entry', function($value) {
+            $arrAux = explode("-", $value);
+            $id = end($arrAux);
+            return Entry::findOrFail($id);
+        });
+
     }
 
     /**
