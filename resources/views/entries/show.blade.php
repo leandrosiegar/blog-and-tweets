@@ -16,11 +16,12 @@
 
                     {{ $entry->content }}
                     <hr>
-                    @if ($entry->user_id == auth()->id())
-                         <a href="{{ url('entries/'.$entry->id.'/edit')}}" class="btn btn-primary">
+                    <!-- usemos un policie -->
+                    @can ('update',$entry) <!-- por defecto es el user logueado -->
+                        <a href="{{ url('entries/'.$entry->id.'/edit')}}" class="btn btn-primary">
                             Editar entrada
                         </a>
-                    @endif
+                    @endcan
 
                 </div>
             </div>

@@ -18,10 +18,7 @@ class Entry extends Model
         $this->attributes['slug'] = Str::slug($value);
     }
 
-    // para q el controller busque por ese campo en vez de por el id
-    public function getRouteKeyName() {
-         return 'slug';
-    }
+
 
     // esto es para q desde las views sea más cómodo y no haya q escribir tanto
     public function getUrl() {

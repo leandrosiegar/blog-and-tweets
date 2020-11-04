@@ -13,6 +13,7 @@ class EntryController extends Controller
     }
 
     public function create() {
+
         return view("entries.create");
     }
 
@@ -35,11 +36,17 @@ class EntryController extends Controller
     }
 
     public function edit(Entry $entry) {
+        // verificamos con el policie
+        $this->authorize('update',$entry); // el id_user coge el user logueado por defecto
+
         return view("entries.edit", compact('entry'));
     }
 
     public function update(Request $request, Entry $entry) {
         // dd($request->all());
+
+        // verificamos con el policie
+        $this->authorize('update',$entry); // el id_user coge el user logueado por defecto
 
         $datosValidados = $request->validate([
             // Que el título sea único exceptuando el id de la misma entrada

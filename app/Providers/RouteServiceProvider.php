@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
+use App\Entry;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
-
-use App\Entry;
+use App\Exceptions\InvalidEntrySlugException;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -35,10 +35,16 @@ class RouteServiceProvider extends ServiceProvider
          parent::boot();
 
         // para hacer que coga el id del slug por si se cambie el slug tire siempre del id
-        Route::bind('entry', function($value) {
+        Route::bind('entryBySlug', function($value) {
             $arrAux = explode("-", $value);
             $id = end($arrAux);
-            return Entry::findOrFail($id);
+            $entry = Entry::findOrFail($id);
+            if ($entry->slug."-".$entry->id === $value) {
+                return $entry;
+            }
+            else {
+                throw new InvalidEntrySlugException($entry);
+            }
         });
 
     }
