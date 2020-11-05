@@ -36,9 +36,15 @@
                         @endforeach
                     </ul>
 
-
-
+                    <div class="card-footer">
+                            Autor:
+                        <a href="{{ url('@'.$item->user->username)}}">
+                                {{ $item->user->name }}
+                            </a>
+                        </div>
                 </div>
+
+
             </div>
         </div>
     </div>

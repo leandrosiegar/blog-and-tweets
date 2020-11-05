@@ -17,6 +17,8 @@ Route::get('/', 'GuestController@index');
 
 Auth::routes();
 
+Route::get('/@{user}', 'UserController@show');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/entries/create', 'EntryController@create');
@@ -26,5 +28,5 @@ Route::get('/entries/{entryBySlug}', 'GuestController@show'); // pq EntryControl
 Route::get('/entries/{entry}/edit', 'EntryController@edit')->middleware('can:update,entry');
 Route::put('/entries/{entry}', 'EntryController@update')->middleware('can:update,entry');
 
-Route::get('/users/@{user}', 'UserController@show');
+
 
