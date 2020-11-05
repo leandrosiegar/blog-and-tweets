@@ -14,16 +14,20 @@
                         </div>
                     @endif
 
-                    <p>Mis entradas</p>
-                    <ul>
-                        @foreach ($entries as $item)
-                            <li>
-                                <a href="{{ $item->getUrl() }}">
-                                    {{ $item->title}}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
+                    @if ($entries->isEmpty())
+                        <p>Aún no tienes ninguna entrada publicada</p>
+                    @else
+                        <p>Mis entradas</p>
+                        <ul>
+                            @foreach ($entries as $item)
+                                <li>
+                                    <a href="{{ $item->getUrl() }}">
+                                        {{ $item->title}}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
                 </div>
             </div>
         </div>
